@@ -1,0 +1,5 @@
+wordcount = LOAD '/home/acadgild/Desktop/data/pig/WordCountWithPig.txt' AS (words:chararray);
+numword = FOREACH wordcount GENERATE FLATTEN(TOKENIZE(words)) as word;
+groupword = GROUP numword BY word;
+finalwordcount = FOREACH groupword GENERATE group, COUNT(numword);
+dump finalwordcount;
